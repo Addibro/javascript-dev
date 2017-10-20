@@ -47,3 +47,23 @@ To use babel we need to add it to our package.json file, specifically to the pre
 "prestart": "babel-node buildSc...."
 We can use it for our src server too:
 "open-src": "babel-node buildScript..."
+
+## 5. Bundling
+Nowadays you need to bundle up code that the browser can consume,
+but you can also use a bundler create different file structures
+
+# 5.1 Module format
+ES6 modules is a standardized, statically analyzable
+(improved autocomplete, intelligent refactoring, fail fast, tree shaking)
+Tree shaking = dead code elimination
+ES6 is easy to read (named imports, defaults exports)
+
+# 5.2 The bundler -- Webpack
+Webpack bundle all our assets up into a single file that runs in our target environment, for example the web.
+We will configure webpack in a js file (like webpack.config.js)
+
+@see webpack.config.dev.js
+
+# 5.3 Configure express to use webpack
+
+
