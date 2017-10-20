@@ -19,7 +19,7 @@ export default {
     target: 'web', // could be electron or node if we're running an app in node (so that node could work with it, instead of the browser)
 
     output: { // here we define where webpack should create our dev bundle
-        path: path.path.resolve(__dirname, 'src'),
+        path: path.resolve(__dirname, 'src'),
         publicPath: '/',
         filename: 'bundle.js' // this will call our bundle, bundle.js
     }, // webpack wont generate any physical files, creates a bundle in memory and serve it to the browser

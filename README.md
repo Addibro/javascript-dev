@@ -45,8 +45,8 @@ Add a .babelrc file and add
 
 To use babel we need to add it to our package.json file, specifically to the prestart script:
 "prestart": "babel-node buildSc...."
-We can use it for our src server too:
-"open-src": "babel-node buildScript..."
+We can use it for our src server(srcServer.js) too:
+"open-src": "babel-node buildScript..." and now we can use ES syntax, like import express from 'express';
 
 ## 5. Bundling
 Nowadays you need to bundle up code that the browser can consume,
