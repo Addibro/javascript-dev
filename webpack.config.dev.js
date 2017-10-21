@@ -20,7 +20,7 @@ export default {
 
     output: { // here we define where webpack should create our dev bundle
         path: path.resolve(__dirname, 'src'),
-        publicPath: '/',
+        publicPath: '/', // this variable is being referenced in srcServer in app.use method
         filename: 'bundle.js' // this will call our bundle, bundle.js
     }, // webpack wont generate any physical files, creates a bundle in memory and serve it to the browser
 

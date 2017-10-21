@@ -1,8 +1,8 @@
-# javascript-dev
+# Javascript-dev
 
 This is a evnironment template for javascript
 
-# what's going on here?!
+# What's going on here?!
 
 
 ### 1. run security check with nsp check (after installing nsp with npm)
@@ -66,8 +66,8 @@ we can use it for our src server(srcserver.js) too:
 ```
 and now we can use es syntax, like import express from 'express';
 
-### 5. bundling
-nowadays you need to bundle up code that the browser can consume,
+### 5. Bundling
+Nowadays you need to bundle up code that the browser can consume,
 but you can also use a bundler create different file structures
 
 #### 5.1 module format
@@ -78,19 +78,56 @@ es6 is easy to read (named imports, defaults exports)
 
 #### 5.2 the bundler -- webpack
 webpack bundle all our assets up into a single file that runs in our target environment, for example the web.
-we will configure webpack in a js file (like webpack.config.js)
+we will configure webpack in a js file (like webpack.config.dev.js)
 
 @see webpack.config.dev.js
 
-#### 5.3 configure express to use webpack
+#### 5.3 Configure express to use webpack
+In our srcServer we import to packages, webpack and the webpack config:
 
+```
+import webpack from 'webpack';
+import config from '../webpack.config.dev';
+```
 
-### 6. sourcemap
-maps code back to original source code
-part of our build
+Then create a compiler using webpack with config:
+```
+const compiler = webpack(config);
+```
+
+To use webpack:
+```
+app.use(require('webpack-dev-middleware')(compiler, {
+    noInfo: true, // no info display
+    publicPath: config.output.publicPath // this is a variable in the output object in webpack.config.dev.js
+}));
+
+```
+
+#### 5.4 Handle css with webpack
+In our webpack config file we added loaders for modules, for js and css
+So now we can create some style in a css file. And all we have to do is to
+import that css file to our index.js file:
+
+```
+import './inedx.css';
+```
+
+Webpack parse our style sheet and then use javascript to inject the style onto the page
+(Check this in the Network tab using inspection in Chrome etc)
+
+### 6. Sourcemap
+Maps code back to original source code, part of our build,
 downloaded if you open developer tools (only downloaded when you need it)
+We have specified this in the webpack.config.dev.js:
 
-### 7. linting using eslint
+```
+devtool: 'inline-source-map'
+```
+
+We can use the keyword debugger; in our js code to set a break point
+
+### 7. Linting using eslint
 a linter helps you:
 enforce consistence curly brace position, confirm/alert, trailing commas, globals, eval
 avoid mistakes like: extra parenthesis, overwriting function, assignment in conditional, missing default case in switch, debugger /console.log in production
@@ -107,28 +144,41 @@ avoid mistakes like: extra parenthesis, overwriting function, assignment in cond
 }
 ```
 
+```
 "env": { --> declare some environments that lint should be aware of, like the browser, node, mocha etc
+```
 
+```
 "rules": { --> any rules we want to override
     "no-console": 1 --> 0 == off, 1 == warning, 2 == error, so if you feel strongly about a rule you can set it to 2, and it will break your build
 }
-
+```
 to use the lint watch library add i into package.json, for example:
+```
 "lint": "esw webpack.config.* src buildscripts"
-
+```
 @see package.json
 
-### 8. tests
+### 8. Tests
 unit tests --> small units, single functions
     should run every time you hit save (automatic)
 integration test --> testing multiple items (clicking and waiting)
 
 
-### 9. continuous integration (ci)
-Let's create a ci server!
+### 9. Continuous integration (ci)
+"Continuous Integration (CI) is a development practice that requires developers to integrate code into a shared repository several times a day.
+Each check-in is then verified by an automated build, allowing teams to detect problems early."
+Let's create a ci server to:
     Run Automated build
     Run your tests
     Check code coverage
     Automate deployment
-Travis CI™ for Linux
-Appveyor for Windows
+Travis CI™ for Linux [](https://travis-ci.org/Addibro/javascript-dev)
+Appveyor for Windows [](https://ci.appveyor.com/project/Addibro/javascript-dev)
+
+### 10. HTTP calls
+We can handle http calls in javascript. Node has two packages: http (provides basic functionality for making http requests)
+and request (higher level library)
+
+
+#### 10.1 Mocking HTTP calls
