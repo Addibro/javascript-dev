@@ -67,3 +67,30 @@ We will configure webpack in a js file (like webpack.config.js)
 # 5.3 Configure express to use webpack
 
 
+## 6. Sourcemap
+Maps code back to original source code
+Part of our build
+Downloaded if you open developer tools (only downloaded when YOU need it)
+
+## 7. Linting using ESLint
+A linter helps you:
+Enforce consistence curly brace position, confirm/alert, trailing commas, globals, eval
+Avoid mistakes like: extra parenthesis, overwriting function, assignment in conditional, missing default case in switch, debugger /console.log in production
+
+"extends": "eslint: recommended" --> tells eslint to use the recommended rules (warnings and errors)
+           "plugin:import/errors" and "plugin:import/warning" --> adds enhanced linting of ES6 import syntax
+"parserOption": {
+    "ecmaVersion": 7 --> using version of Javascript 7
+    "sourceType": "module" --> using standard Javascript modules
+}
+
+"env": { --> declare some environments that lint should be aware of, like the browser, node, mocha etc
+
+"rules": { --> any rules we want to override
+    "no-console": 1 --> 0 == Off, 1 == Warning, 2 == Error, so if you feel strongly about a rule you can set it to 2, and it will break your build
+}
+
+To use the lint watch library add i into package.json, for example:
+"lint": "esw webpack.config.* src buildScripts"
+
+@see package.json

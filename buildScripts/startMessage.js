@@ -4,4 +4,4 @@
 // since we use babel we can use the ES6 syntax like so:
 import chalk from 'chalk';
 
-console.log(chalk.green("Starting app in dev mode..."));
+console.log(chalk.green("Starting app in dev mode...")); // eslint-disable-line no-console
