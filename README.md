@@ -1,6 +1,6 @@
 # javascript-dev
 
-### what's going on here?!
+# what's going on here?!
 
 
 ## 1. run security check with nsp check (after installing nsp with npm)
@@ -52,19 +52,19 @@ we can use it for our src server(srcserver.js) too:
 nowadays you need to bundle up code that the browser can consume,
 but you can also use a bundler create different file structures
 
-# 5.1 module format
+### 5.1 module format
 es6 modules is a standardized, statically analyzable
 (improved autocomplete, intelligent refactoring, fail fast, tree shaking)
 tree shaking = dead code elimination
 es6 is easy to read (named imports, defaults exports)
 
-# 5.2 the bundler -- webpack
+### 5.2 the bundler -- webpack
 webpack bundle all our assets up into a single file that runs in our target environment, for example the web.
 we will configure webpack in a js file (like webpack.config.js)
 
 @see webpack.config.dev.js
 
-# 5.3 configure express to use webpack
+### 5.3 configure express to use webpack
 
 
 ## 6. sourcemap
