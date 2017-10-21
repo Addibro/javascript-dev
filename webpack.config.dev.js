@@ -1,12 +1,12 @@
 // once again, since we have babel we can use ES6 features
-import webpack from 'webpack';
+// import webpack from 'webpack';
 import path from 'path';
 
 export default {
 
     debug: true, // enables some debugging information as we run our build
 
-    devtool: 'inline-source-map', //
+    devtool: 'inline-source-map',
 
     noInfo: false, // will display list of all files it's bundling
 
