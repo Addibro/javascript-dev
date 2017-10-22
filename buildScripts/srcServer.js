@@ -25,11 +25,19 @@ app.use(require('webpack-dev-middleware')(compiler, { // app.use tells express o
     publicPath: config.output.publicPath
 }));
 
-
 app.get('/', function (req, res) {  // "any references to the root should be handled by this function, which takes and request and a response"
     res.sendFile(path.join(__dirname, '../src/index.html'));
     // join together a path to our src dir (index.html)
     // dirname will get us the current directory name that we're currently running in
+});
+
+
+app.get('/users', function (req, res) { // when we hit '/users' it should return this json with some data, in dev mode we type /users after the localhost:3000
+    res.json([
+        {"id": 1,"firstName":"Andreas","lastName":"Alme", "email":"andreas.alme.eriksson@gmail.com"},
+        {"id": 2,"firstName":"Lisa","lastName":"Alme", "email":"bmoll7_5@gmail.com"},
+        {"id": 3,"firstName":"Knut","lastName":"Alme", "email":"knut.stocke@gmail.com"}
+    ])
 });
 
 app.listen(port, function (err) {

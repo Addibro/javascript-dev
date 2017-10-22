@@ -4,7 +4,6 @@ This is a evnironment template for javascript
 
 # What's going on here?!
 
-
 ### 1. run security check with nsp check (after installing nsp with npm)
 although, you'll create a script for this later
 
@@ -166,19 +165,60 @@ integration test --> testing multiple items (clicking and waiting)
 
 
 ### 9. Continuous integration (ci)
-"Continuous Integration (CI) is a development practice that requires developers to integrate code into a shared repository several times a day.
-Each check-in is then verified by an automated build, allowing teams to detect problems early."
-Let's create a ci server to:
-    Run Automated build
-    Run your tests
-    Check code coverage
-    Automate deployment
-Travis CI™ for Linux [](https://travis-ci.org/Addibro/javascript-dev)
-Appveyor for Windows [](https://ci.appveyor.com/project/Addibro/javascript-dev)
+"Continuous Integration (CI) is a development practice that requires developers to integrate code into a shared repository several times a day. Each check-in is then verified by an automated build, allowing teams to detect problems early." Let's create a ci server to:
+- Run Automated build
+- Run your tests
+- Check code coverage
+- Automate deployment
+
+[Travis](https://travis-ci.org/Addibro/javascript-dev) CI™ for Linux
+[Appveyor](https://ci.appveyor.com/project/Addibro/javascript-dev) for Windows
 
 ### 10. HTTP calls
-We can handle http calls in javascript. Node has two packages: http (provides basic functionality for making http requests)
+We can handle http calls in javascript.
+Node can use packages: http (provides basic functionality for making http requests)
 and request (higher level library)
+Browser can use XMLHttpRequest (old), jQuery (faster and cleaner) and Angular (framework-based) and Fetch
+Node and & browser can use isomorphic-fetch, xhr, SuperAgent, Axios
 
+Centralized API calls: configure all calls, handle preloader logic, handle errors, single seam for mocking.
 
 #### 10.1 Mocking HTTP calls
+Why Mock http?
+- Unit testing
+- Instant response
+- Keep wokring when service are down
+- Rapid prototyping
+- Avoid inter-team bottlenecks
+- Work offline
+
+How to:
+1. Declare our schema:
+    - JSON SChema Faker
+2. Generate Random Data:
+    - faker.js (we'll use this)
+    - chance.js
+    - randexp.js
+3. Server Data via API
+    - JSON Server
+
+@see generateMockData.js
+
+Randomized data is helpful, simulates edge cases such as:
+1. Empty lists
+2. Long lists
+3. Long values
+4. Testing
+5. Filtering
+6. Sorting
+
+So let's generate new random mocks data every time we run the app, by adding a "pre" script:
+```
+"prestart-mockapi": "npm run generate-mock"
+```
+This will generate our mock data before it runs start mock api. Also, we add this script to our "start" script:
+```
+"start": "npm-run-all --parallel security-check open-src lint-watch test-watch start-mockapi"
+```
+
+And now we need to redirect our app to hit the new mock api instead of that express api call we created earlier:
